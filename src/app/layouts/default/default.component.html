@@ -1,0 +1,14 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <a href="#" (click)="toggle()" class="nb-menu">Application Title</a>
+  </nb-layout-header>
+
+  <nb-sidebar state="compacted" (click)="expand()">
+    <nb-menu [items]="menuItems"> </nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column class="colored-column-basic">
+    <router-outlet></router-outlet>
+    <ng-content></ng-content>
+  </nb-layout-column>
+</nb-layout>

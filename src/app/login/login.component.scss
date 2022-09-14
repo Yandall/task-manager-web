@@ -1,0 +1,19 @@
+nb-layout-column {
+  align-self: center;
+  text-align: -webkit-center;
+}
+
+nb-card {
+  min-width: 500px;
+  width: fit-content;
+}
+
+nb-checkbox {
+  margin-inline: 10px;
+}
+
+.buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

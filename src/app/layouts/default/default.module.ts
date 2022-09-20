@@ -11,7 +11,7 @@ import { LayoutDefaultComponent } from "./default.component";
         RouterModule,
         NbLayoutModule,
         NbSidebarModule,
-        NbMenuModule,
+        NbMenuModule
     ],
     providers: [NbSidebarService],
     exports: [LayoutDefaultComponent]

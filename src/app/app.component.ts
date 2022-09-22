@@ -12,12 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    let logged = false
-    if (!logged) {
-      this.router.navigate(['/login'])
-      return 
-    }
-    this.router.navigate(['/dashboard'])
-    return
+
   }
 }

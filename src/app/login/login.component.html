@@ -3,19 +3,43 @@
     <h1>The Game</h1>
     <nb-card>
       <nb-card-body>
-        <form>
+        <form #user="ngForm" (ngSubmit)="login(user)">
           <nb-form-field>
             <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
-            <input type="text" placeholder="Email" nbInput fullWidth />
+            <input
+              type="text"
+              placeholder="Email"
+              nbInput
+              fullWidth
+              name="email"
+              ngModel
+            />
           </nb-form-field>
           <nb-form-field>
             <nb-icon nbPrefix icon="lock"></nb-icon>
-            <input type="text" placeholder="Password" nbInput fullWidth />
+            <input
+              type="text"
+              placeholder="Password"
+              nbInput
+              fullWidth
+              name="password"
+              ngModel
+              type="password"
+            />
           </nb-form-field>
           <div class="buttons-row">
-            <button nbButton status="primary">Register</button>
-            <button nbButton status="basic">Log in</button>
-            <nb-checkbox status="basic">Keep Logged</nb-checkbox>
+            <button
+              nbButton
+              status="primary"
+              type="button"
+              (click)="register()"
+            >
+              Register
+            </button>
+            <button nbButton status="basic" type="submit">Log in</button>
+            <nb-checkbox status="basic" name="keepLogged" ngModel
+              >Keep Logged</nb-checkbox
+            >
           </div>
         </form>
       </nb-card-body>

@@ -1,43 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { BoardsService } from 'src/app/services/board.service';
+import { FoldersService } from 'src/app/services/folder.service';
+import { Folder } from 'src/app/shared/types';
 
 @Component({
   selector: 'layout-default',
   templateUrl: 'default.component.html',
+  styleUrls: ['default.component.scss'],
 })
 export class LayoutDefaultComponent implements OnInit {
+  sidebarOpen = false;
+  resizing = false;
+  foldersMenuItem: NbMenuItem = {
+    title: 'Folders',
+    icon: 'folder',
+    children: [],
+  };
 
-   menuItems: NbMenuItem[] = [
-    {
-      title: 'Profile',
-      icon: 'person-outline',
-    },
-    {
-      title: 'Change Password',
-      icon: 'lock-outline',
-    },
-    {
-      title: 'Privacy Policy',
-      icon: { icon: 'checkmark-outline', pack: 'eva' },
-    },
-    {
-      title: 'Logout',
-      icon: 'unlock-outline',
-    },
-  ];
+  menuItems: NbMenuItem[] = [this.foldersMenuItem];
 
-  constructor(private sideBarService: NbSidebarService, private router: Router){}
+  constructor(
+    private foldersService: FoldersService,
+    private sidebarService: NbSidebarService
+  ) {}
   ngOnInit() {
-    console.log("TODO")
+    this.foldersService.getAll().subscribe((folders) => {
+      this.formatFoldersStructure(folders);
+    });
   }
 
   toggle() {
-    this.sideBarService.toggle(true)
+    this.sidebarService.toggle(true);
+    this.sidebarOpen = !this.sidebarOpen;
   }
-  
-expand() {
-   this.sideBarService.expand()
+
+  expand() {
+    this.sidebarService.expand();
+    this.sidebarOpen = true;
+  }
+
+  formatFoldersStructure(folders: Folder[]) {
+    folders.forEach((folder) => {
+      const folderItem: NbMenuItem = {
+        title: folder.name!,
+        icon: folder.config!['icon']
+          ? folder.config!['icon']
+          : 'arrowhead-right',
+        children: [],
+      };
+      const boardsItems = folder.boards!.filter(
+        (board) => board.folderId === folder.id
+      );
+      boardsItems.forEach((board) => {
+        folderItem.children?.push({
+          title: board.name!,
+          icon: board.config!['icon'] ? board.config!['icon'] : 'layout',
+          link: board.id,
+          badge: { text: 'hola', status: 'primary' },
+        });
+      });
+      this.foldersMenuItem.children?.push(folderItem);
+    });
+  }
+
+  @HostListener('window:mousemove', ['$event'])
+  onResize(event: MouseEvent) {
+    if (this.resizing && this.sidebarOpen) this.resizeSideBar(event.clientX);
+  }
+
+  resizeSideBar(width: number) {
+    const newWidth = Math.max(Math.min(width, 400), 150);
+    document.body.style.setProperty('--sidebar-width', newWidth + 'px');
   }
 }
-

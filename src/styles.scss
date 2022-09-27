@@ -20,6 +20,24 @@ form {
   align-items: stretch;
 }
 
-nb-sidebar {
-  transition: 0.3s ease-out;
+nb-sidebar,
+nb-sidebar > *,
+.resizer {
+  transition: 0.2s ease-out;
+}
+
+.divider {
+  height: 100vh;
+  width: 2px;
+  position: fixed;
+  margin: -2.25rem;
+  background-color: var(--border-primary-color-1);
+}
+
+.resizer {
+  &:active,
+  &:hover {
+    cursor: ew-resize;
+    user-select: none;
+  }
 }

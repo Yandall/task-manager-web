@@ -1,15 +1,24 @@
 <nb-layout>
   <nb-layout-header fixed>
-    <!-- <a href="#" class="nb-menu">Application Title</a> -->
-    <p (click)="toggle()">Abrir</p>
+    <nb-actions>
+      <nb-action
+        [icon]="sidebarOpen ? 'chevron-left' : 'menu'"
+        (click)="toggle()"
+      ></nb-action>
+    </nb-actions>
   </nb-layout-header>
 
   <nb-sidebar state="compacted" (click)="expand()">
-    <nb-menu [items]="menuItems"> </nb-menu>
+    <nb-menu [items]="menuItems"></nb-menu>
   </nb-sidebar>
-
-  <nb-layout-column class="colored-column-basic">
-    <router-outlet></router-outlet>
+  <nb-layout-column>
+    <div
+      id="resizer"
+      class="divider"
+      [ngClass]="{ resizer: sidebarOpen }"
+      (mousedown)="resizing = true"
+      (window:mouseup)="resizing = false"
+    ></div>
     <ng-content></ng-content>
   </nb-layout-column>
 </nb-layout>

@@ -10,4 +10,8 @@ export class BoardsService {
   getAll() {
     return this.http.get<Board[]>(`${environment.URL_API}/boards`);
   }
+
+  getOne(id: string) {
+    return this.http.get<Board>(`${environment.URL_API}/boards/${id}`);
+  }
 }

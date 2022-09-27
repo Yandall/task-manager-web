@@ -19,3 +19,7 @@ export type Board = {
   updatedDate?: string;
   isDeleted?: boolean;
 };
+
+export type Section = {
+  title?: string;
+};

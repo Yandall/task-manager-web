@@ -1,0 +1,28 @@
+.board-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow-x: auto;
+}
+
+.board-layout::-webkit-scrollbar {
+  height: 8px;
+}
+
+.board-layout::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.board-layout::-webkit-scrollbar-thumb {
+  background-color: var(--border-primary-color-1);
+  border-radius: 20px;
+}
+
+.add-section-button {
+  align-self: center;
+  height: fit-content;
+  padding: 1.4rem !important;
+  background-color: transparent !important;
+  border-radius: 5rem;
+  border: 4px solid;
+}

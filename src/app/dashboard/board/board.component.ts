@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BoardsService } from 'src/app/services/board.service';
 import { Board } from 'src/app/shared/types';
 
@@ -9,11 +9,18 @@ import { Board } from 'src/app/shared/types';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
+  board: Board = {};
   constructor(
     private boardsService: BoardsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.boardsService.getOne(params['id']).subscribe((value) => {
+        this.board = value;
+      });
+    });
+  }
 }

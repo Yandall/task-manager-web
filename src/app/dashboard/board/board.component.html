@@ -1,1 +1,9 @@
-<p>Board works!</p>
+<div class="board-layout">
+  <board-section
+    *ngFor="let section of board.config!['sections']"
+    [section]="section"
+  ></board-section>
+  <button nbButton status="info" class="add-section-button" shape="round">
+    <nb-icon icon="star"></nb-icon>
+  </button>
+</div>

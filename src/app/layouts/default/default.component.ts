@@ -57,7 +57,7 @@ export class LayoutDefaultComponent implements OnInit {
           title: board.name!,
           icon: board.config!['icon'] ? board.config!['icon'] : 'layout',
           link: board.id,
-          badge: { text: 'hola', status: 'primary' },
+          badge: { text: '🙃', status: 'primary' },
         });
       });
       this.foldersMenuItem.children?.push(folderItem);

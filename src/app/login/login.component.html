@@ -3,7 +3,7 @@
     <h1>The Game</h1>
     <nb-card>
       <nb-card-body>
-        <form #user="ngForm" (ngSubmit)="login(user)">
+        <form (ngSubmit)="login()">
           <nb-form-field>
             <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
             <input
@@ -12,7 +12,8 @@
               nbInput
               fullWidth
               name="email"
-              ngModel
+              #name="ngModel"
+              [(ngModel)]="user.email"
             />
           </nb-form-field>
           <nb-form-field>
@@ -23,11 +24,12 @@
               nbInput
               fullWidth
               name="password"
-              ngModel
+              #name="ngModel"
+              [(ngModel)]="user.password"
               type="password"
             />
           </nb-form-field>
-          <div class="buttons-row">
+          <div class="row">
             <button
               nbButton
               status="primary"
@@ -37,7 +39,11 @@
               Register
             </button>
             <button nbButton status="basic" type="submit">Log in</button>
-            <nb-checkbox status="basic" name="keepLogged" ngModel
+            <nb-checkbox
+              status="basic"
+              name="keepLogged"
+              #name="ngModel"
+              [(ngModel)]="user.keepLogged"
               >Keep Logged</nb-checkbox
             >
           </div>

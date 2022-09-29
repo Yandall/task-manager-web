@@ -24,3 +24,13 @@ nb-sidebar,
 nb-sidebar > * {
   transition: var(--common-transition);
 }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row.justify-end {
+  justify-content: flex-end;
+}

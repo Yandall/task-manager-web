@@ -11,6 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  user: { email: string; password: string; keepLogged: boolean } = {
+    email: '',
+    password: '',
+    keepLogged: false,
+  };
+
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
@@ -35,13 +41,8 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login(form: NgForm) {
-    const user = form.value;
-    const res = this.http.post(`${environment.URL_API}/auth/login`, {
-      email: user.email,
-      password: user.password,
-      keepLogged: user.keepLogged,
-    });
+  login() {
+    const res = this.http.post(`${environment.URL_API}/auth/login`, this.user);
     res
       .pipe(
         catchError((err) => {

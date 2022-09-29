@@ -3,6 +3,11 @@
   margin: var(--board-section-margin);
 }
 
+button {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 nb-card {
   height: 75vh;
   border-radius: 1rem;
@@ -22,9 +27,14 @@ nb-card-body::-webkit-scrollbar-thumb {
 }
 
 nb-card-header {
+  display: flex;
+  justify-content: space-between;
   padding: 1.5rem 1.5rem;
   background-color: var(--color-primary-700);
   border-radius: 1rem 1rem 0 0;
+  border-top-color: tomato;
+  border-top-style: solid;
+  border-top-width: 5px;
 }
 
 nb-card-body {

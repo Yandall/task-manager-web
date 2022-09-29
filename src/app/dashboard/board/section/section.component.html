@@ -1,5 +1,10 @@
 <nb-card>
-  <nb-card-header>{{ section.title }}</nb-card-header>
+  <nb-card-header>
+    {{ section.title }}
+    <button nbButton status="basic" ghost shape="round">
+      <nb-icon icon="edit" (click)="edit()"></nb-icon>
+    </button>
+  </nb-card-header>
   <nb-card-body>
     <p>placeholder</p>
     <p>placeholder</p>

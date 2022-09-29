@@ -1,9 +1,9 @@
-<div class="board-layout">
+<div class="board-layout" *ngIf="board.config">
   <board-section
     *ngFor="let section of board.config!['sections']"
     [section]="section"
   ></board-section>
   <button nbButton status="info" class="add-section-button" shape="round">
-    <nb-icon icon="star"></nb-icon>
+    <nb-icon icon="plus"></nb-icon>
   </button>
 </div>

@@ -5,23 +5,37 @@ import { DashboardComponent } from './dashboard.component';
 import {
   NbButtonModule,
   NbCardModule,
+  NbDialogModule,
+  NbFormFieldModule,
   NbIconModule,
+  NbInputModule,
   NbMenuModule,
 } from '@nebular/theme';
 import { BoardComponent } from './board/board.component';
 import { RouterModule } from '@angular/router';
 import { SectionComponent } from './board/section/section.component';
+import { EditSectionComponent } from './board/section/edit-section/edit-section.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DashboardComponent, BoardComponent, SectionComponent],
+  declarations: [
+    DashboardComponent,
+    BoardComponent,
+    SectionComponent,
+    EditSectionComponent,
+  ],
   imports: [
     CommonModule,
+    FormsModule,
+    NbFormFieldModule,
     LayoutDefaultModule,
     NbMenuModule,
     RouterModule,
     NbCardModule,
+    NbInputModule,
     NbButtonModule,
     NbIconModule,
+    NbDialogModule.forChild(),
   ],
 })
 export class DashboardModule {}

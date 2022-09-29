@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NbMenuItem, NbSidebarService } from '@nebular/theme';
-import { BoardsService } from 'src/app/services/board.service';
 import { FoldersService } from 'src/app/services/folder.service';
 import { Folder } from 'src/app/shared/types';
 
@@ -44,9 +43,7 @@ export class LayoutDefaultComponent implements OnInit {
     folders.forEach((folder) => {
       const folderItem: NbMenuItem = {
         title: folder.name!,
-        icon: folder.config!['icon']
-          ? folder.config!['icon']
-          : 'arrowhead-right',
+        icon: folder.config!['icon'] || 'arrowhead-right',
         children: [],
       };
       const boardsItems = folder.boards!.filter(
@@ -55,7 +52,7 @@ export class LayoutDefaultComponent implements OnInit {
       boardsItems.forEach((board) => {
         folderItem.children?.push({
           title: board.name!,
-          icon: board.config!['icon'] ? board.config!['icon'] : 'layout',
+          icon: board.config!['icon'] || 'layout',
           link: board.id,
           badge: { text: '🙃', status: 'primary' },
         });

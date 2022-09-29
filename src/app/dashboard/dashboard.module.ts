@@ -13,8 +13,8 @@ import {
 } from '@nebular/theme';
 import { BoardComponent } from './board/board.component';
 import { RouterModule } from '@angular/router';
-import { SectionComponent } from './board/section/section.component';
-import { EditSectionComponent } from './board/section/edit-section/edit-section.component';
+import { SectionComponent } from './section/section.component';
+import { EditSectionComponent } from './section/edit-section/edit-section.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

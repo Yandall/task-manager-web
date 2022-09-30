@@ -2,7 +2,7 @@ export type Folder = {
   id?: string;
   name?: string;
   isDeleted?: boolean;
-  owner?: string;
+  owner?: number;
   config?: { [key: string]: any };
   createdDate?: string;
   updatedDate?: string;
@@ -13,13 +13,29 @@ export type Board = {
   id?: string;
   folderId?: string;
   config?: { [key: string]: any };
-  owner?: string;
+  owner?: number;
   name?: string;
   createdDate?: string;
   updatedDate?: string;
   isDeleted?: boolean;
+  sections?: Section[];
+};
+
+export type Task = {
+  id?: string;
+  createdDate?: string;
+  dueDate?: string;
+  owner?: number;
+  boardId?: string;
 };
 
 export type Section = {
-  title?: string;
+  id?: string;
+  boardId?: string;
+  createdDate?: string;
+  updatedDate?: string;
+  owner?: number;
+  isDeleted?: boolean;
+  config: { title: string; [key: string]: any };
+  tasks?: Task[];
 };

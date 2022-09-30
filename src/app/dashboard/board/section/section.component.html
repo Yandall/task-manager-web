@@ -1,39 +1,11 @@
 <nb-card>
   <nb-card-header>
-    {{ section.title }}
+    {{ section.config.title }}
     <button nbButton status="basic" ghost shape="round">
       <nb-icon icon="edit" (click)="edit()"></nb-icon>
     </button>
   </nb-card-header>
   <nb-card-body>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
-    <p>placeholder</p>
+    <p *ngFor="let task of section.tasks">{{ task.id }}</p>
   </nb-card-body>
 </nb-card>

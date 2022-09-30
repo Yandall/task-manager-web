@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { SectionComponent } from './board/section/section.component';
 import { EditSectionComponent } from './board/section/edit-section/edit-section.component';
 import { FormsModule } from '@angular/forms';
+import { TaskComponent } from './board/task/task.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     BoardComponent,
     SectionComponent,
     EditSectionComponent,
+    TaskComponent,
   ],
   imports: [
     CommonModule,

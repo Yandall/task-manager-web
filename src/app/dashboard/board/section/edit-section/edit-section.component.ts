@@ -24,8 +24,7 @@ export class EditSectionComponent implements OnInit {
   }
 
   save() {
-    this.section.config = { ...this.editConfig };
-    this.onSave.emit(this.section);
+    this.onSave.emit({ ...this.section, config: this.editConfig });
   }
 
   close() {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
+import { first } from 'rxjs';
 import { SectionsService } from 'src/app/services/section.service';
 import { Section } from 'src/app/shared/types';
 import { EditSectionComponent } from './edit-section/edit-section.component';
@@ -12,7 +13,10 @@ import { EditSectionComponent } from './edit-section/edit-section.component';
 export class SectionComponent implements OnInit {
   @Input()
   section: Section = { config: { title: '' } };
-  constructor(private dialogService: NbDialogService) {}
+  constructor(
+    private sectionsService: SectionsService,
+    private dialogService: NbDialogService
+  ) {}
 
   ngOnInit() {}
 
@@ -21,8 +25,12 @@ export class SectionComponent implements OnInit {
       context: { section: this.section },
     });
     dialog.componentRef.instance.onSave.subscribe((value) => {
-      this.section = value;
-      console.log(value);
+      this.sectionsService
+        .updateSection(value)
+        .pipe(first())
+        .subscribe((updated) => {
+          this.section.config = (updated as Section).config;
+        });
     });
   }
 }

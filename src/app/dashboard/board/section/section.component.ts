@@ -23,6 +23,7 @@ export class SectionComponent implements OnInit {
   edit() {
     const dialog = this.dialogService.open(EditSectionComponent, {
       context: { section: this.section },
+      closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onSave.subscribe((value) => {
       this.sectionsService

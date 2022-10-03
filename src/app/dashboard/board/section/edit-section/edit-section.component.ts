@@ -11,8 +11,9 @@ export class EditSectionComponent implements OnInit {
   section: Section = {
     config: { title: '' },
   };
-  editConfig = {
+  editConfig: { [key: string]: any } = {
     title: '',
+    accentColor: '',
   };
 
   onSave = new EventEmitter<Section>();
@@ -25,6 +26,7 @@ export class EditSectionComponent implements OnInit {
 
   save() {
     this.onSave.emit({ ...this.section, config: this.editConfig });
+    this.dialogRef.close();
   }
 
   close() {

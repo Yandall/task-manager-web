@@ -2,9 +2,9 @@
   <nb-card-header
     [ngStyle]="{ 'border-top-color': section.config['accent'] || 'steelblue' }"
   >
-    {{ section.config.title }}
-    <button nbButton status="basic" ghost shape="round">
-      <nb-icon icon="edit" (click)="edit()"></nb-icon>
+    {{ section.config["title"] }}
+    <button (click)="edit()" nbButton status="basic" ghost shape="round">
+      <nb-icon icon="edit"></nb-icon>
     </button>
   </nb-card-header>
   <nb-card-body>

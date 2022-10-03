@@ -40,6 +40,6 @@ export type Section = {
   updatedDate?: string;
   owner?: number;
   isDeleted?: boolean;
-  config: { title: string; [key: string]: any };
+  config: { [key: string]: any };
   tasks?: Task[];
 };

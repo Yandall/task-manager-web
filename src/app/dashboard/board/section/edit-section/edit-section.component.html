@@ -2,15 +2,21 @@
   <nb-card-body>
     <form (ngSubmit)="save()">
       <nb-form-field>
-        <input
-          type="text"
-          placeholder="Title"
-          nbInput
-          fullWidth
-          name="title"
-          [(ngModel)]="editConfig.title"
-          #name="ngModel"
-        />
+        <div class="row">
+          <input
+            type="text"
+            placeholder="Title"
+            nbInput
+            fullWidth
+            name="title"
+            [(ngModel)]="editConfig['title']"
+            #name="ngModel"
+          />
+          <color-picker
+            [value]="editConfig['accent']"
+            (color)="editConfig['accent'] = $event"
+          ></color-picker>
+        </div>
       </nb-form-field>
       <div class="row justify-end">
         <button nbButton status="primary" type="submit">

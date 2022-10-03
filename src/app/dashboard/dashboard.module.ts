@@ -18,6 +18,7 @@ import { SectionComponent } from './board/section/section.component';
 import { EditSectionComponent } from './board/section/edit-section/edit-section.component';
 import { FormsModule } from '@angular/forms';
 import { TaskComponent } from './board/task/task.component';
+import { SharedModule } from '../shared/components/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TaskComponent } from './board/task/task.component';
     TaskComponent,
   ],
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     NbFormFieldModule,

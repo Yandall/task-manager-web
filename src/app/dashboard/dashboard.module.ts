@@ -10,6 +10,7 @@ import {
   NbIconModule,
   NbInputModule,
   NbMenuModule,
+  NbTagModule,
 } from '@nebular/theme';
 import { BoardComponent } from './board/board.component';
 import { RouterModule } from '@angular/router';
@@ -37,6 +38,7 @@ import { TaskComponent } from './board/task/task.component';
     NbInputModule,
     NbButtonModule,
     NbIconModule,
+    NbTagModule,
     NbDialogModule.forChild(),
   ],
 })

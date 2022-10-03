@@ -1,0 +1,15 @@
+nb-card-body:hover {
+  background-color: var(--color-basic-900);
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: medium;
+  font-weight: bold;
+}
+
+nb-tag-list {
+  margin: 0.8rem 0.5rem 0 0;
+}

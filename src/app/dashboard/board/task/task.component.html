@@ -1,0 +1,17 @@
+<nb-card (click)="edit()">
+  <nb-card-body>
+    <div class="row">
+      <p>
+        {{ task.content["title"] }}
+      </p>
+    </div>
+    <div class="row justify-start">
+      <nb-tag-list>
+        <nb-tag status="basic" appearance="outline" text="mucho texto"></nb-tag>
+        <nb-tag status="basic" appearance="outline" text="basic"></nb-tag>
+        <nb-tag status="basic" appearance="outline" text="basic"></nb-tag>
+        <nb-tag status="basic" appearance="outline" text="basic"></nb-tag>
+      </nb-tag-list>
+    </div>
+  </nb-card-body>
+</nb-card>

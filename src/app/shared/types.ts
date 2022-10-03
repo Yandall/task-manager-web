@@ -26,7 +26,11 @@ export type Task = {
   createdDate?: string;
   dueDate?: string;
   owner?: number;
-  boardId?: string;
+  sectionId?: string;
+  config: { [key: string]: any };
+  content: { [key: string]: any };
+  updatedDate?: string;
+  isDeleted?: boolean;
 };
 
 export type Section = {

@@ -1,11 +1,13 @@
 <nb-card>
-  <nb-card-header>
+  <nb-card-header
+    [ngStyle]="{ 'border-top-color': section.config['accent'] || 'steelblue' }"
+  >
     {{ section.config.title }}
     <button nbButton status="basic" ghost shape="round">
       <nb-icon icon="edit" (click)="edit()"></nb-icon>
     </button>
   </nb-card-header>
   <nb-card-body>
-    <p *ngFor="let task of section.tasks">{{ task.id }}</p>
+    <board-task *ngFor="let task of section.tasks" [task]="task"></board-task>
   </nb-card-body>
 </nb-card>

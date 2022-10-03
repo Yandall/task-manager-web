@@ -14,6 +14,7 @@ import {
 import { AuthInterceptor } from 'src/app/interceptors/auth-interceptor';
 import { BoardsService } from 'src/app/services/board.service';
 import { FoldersService } from 'src/app/services/folder.service';
+import { SectionsService } from 'src/app/services/section.service';
 import { LayoutDefaultComponent } from './default.component';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { LayoutDefaultComponent } from './default.component';
   providers: [
     FoldersService,
     BoardsService,
+    SectionsService,
     NbSidebarService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

@@ -1,0 +1,15 @@
+<div id="container">
+  <li>
+    <ul
+      *ngFor="let color of colorsList"
+      [ngStyle]="{ 'background-color': color }"
+      (click)="select(color)"
+    ></ul>
+    <input
+      type="color"
+      id="color_picker"
+      [(ngModel)]="pickerColor"
+      (input)="select(pickerColor)"
+    />
+  </li>
+</div>

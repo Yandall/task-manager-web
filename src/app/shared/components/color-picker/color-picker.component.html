@@ -1,0 +1,13 @@
+<div class="row">
+  <div id="icon" [ngStyle]="{ 'background-color': value || 'tomato' }"></div>
+  <button
+    type="button"
+    (click)="edit()"
+    nbButton
+    status="basic"
+    ghost
+    shape="round"
+  >
+    <nb-icon icon="edit"></nb-icon>
+  </button>
+</div>

@@ -1,0 +1,50 @@
+#container {
+  width: 17rem;
+  background-color: var(--color-basic-300);
+  border-radius: 10px;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+ul {
+  width: 1.5rem;
+  height: 1.5rem;
+  text-decoration: none;
+  padding: 0;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#color_picker {
+  cursor: pointer;
+  width: 2rem;
+  margin: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  flex: none;
+  background-color: transparent;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("https://akveo.github.io/eva-icons/fill/svg/color-picker.svg");
+}
+#color_picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+  background-color: transparent;
+  margin: 0;
+}
+#color_picker::-webkit-color-swatch {
+  border: none;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+}

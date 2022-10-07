@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
-import { first } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
+import { first, interval, Subscription } from 'rxjs';
 import { SectionsService } from 'src/app/services/section.service';
 import { Section } from 'src/app/shared/types';
 import { EditSectionComponent } from './edit-section/edit-section.component';
@@ -10,7 +10,7 @@ import { EditSectionComponent } from './edit-section/edit-section.component';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent {
   @Input()
   section: Section = { config: { title: '' } };
   constructor(
@@ -18,20 +18,15 @@ export class SectionComponent implements OnInit {
     private dialogService: NbDialogService
   ) {}
 
-  ngOnInit() {}
-
   edit() {
     const dialog = this.dialogService.open(EditSectionComponent, {
       context: { section: this.section },
       closeOnBackdropClick: true,
     });
-    dialog.componentRef.instance.onSave.subscribe((value) => {
-      this.sectionsService
-        .updateSection(value)
-        .pipe(first())
-        .subscribe((updated) => {
-          this.section.config = (updated as Section).config;
-        });
+    dialog.componentRef.instance.onSave.pipe(first()).subscribe((value) => {
+      this.sectionsService.updateSection(value).subscribe((updated) => {
+        this.section.config = updated.config;
+      });
     });
   }
 }

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
+import { Subject } from 'rxjs';
 import { Section } from 'src/app/shared/types';
 
 @Component({
@@ -16,7 +17,7 @@ export class EditSectionComponent implements OnInit {
     accentColor: '',
   };
 
-  onSave = new EventEmitter<Section>();
+  onSave = new Subject<Section>();
 
   constructor(private dialogRef: NbDialogRef<EditSectionComponent>) {}
 
@@ -25,7 +26,7 @@ export class EditSectionComponent implements OnInit {
   }
 
   save() {
-    this.onSave.emit({ ...this.section, config: this.editConfig });
+    this.onSave.next({ ...this.section, config: this.editConfig });
     this.dialogRef.close();
   }
 

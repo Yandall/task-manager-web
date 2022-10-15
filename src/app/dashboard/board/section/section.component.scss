@@ -1,6 +1,7 @@
 :host {
   width: var(--board-section-min-width);
   margin: var(--board-section-margin);
+  display: flex;
 }
 
 button {
@@ -8,7 +9,7 @@ button {
 }
 
 nb-card {
-  height: 75vh;
+  margin: 0;
   border-radius: 1rem;
 }
 

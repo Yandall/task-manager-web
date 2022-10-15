@@ -24,6 +24,8 @@ export class EditDialogComponent implements OnInit {
     '#ff708d',
     '#323259',
     '#b4b4db',
+    '#e1e1f2',
+    '',
   ];
   pickerColor: string = '';
   colorSelected = new EventEmitter<string>();

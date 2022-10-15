@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { catchError, throwError } from 'rxjs';
+import { catchError, first, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     });
     res
       .pipe(
+        first(),
         catchError((err) => {
           this.cookieService.delete('token');
           throw { message: err.error.message };

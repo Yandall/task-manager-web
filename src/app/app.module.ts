@@ -27,6 +27,9 @@ import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
+    AppRoutingModule,
+    DashboardModule,
+    LayoutDefaultModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
@@ -36,9 +39,6 @@ import { CookieService } from 'ngx-cookie-service';
     NbLayoutModule,
     NbCardModule,
     NbEvaIconsModule,
-    AppRoutingModule,
-    DashboardModule,
-    LayoutDefaultModule,
     NbFormFieldModule,
     NbInputModule,
     NbIconModule,

@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { first } from 'rxjs';
 import { FoldersService } from 'src/app/services/folder.service';
 import { Folder } from 'src/app/shared/types';
 
@@ -24,9 +25,12 @@ export class LayoutDefaultComponent implements OnInit {
     private sidebarService: NbSidebarService
   ) {}
   ngOnInit() {
-    this.foldersService.getAll().subscribe((folders) => {
-      this.formatFoldersStructure(folders);
-    });
+    this.foldersService
+      .getAll()
+      .pipe(first())
+      .subscribe((folders) => {
+        this.formatFoldersStructure(folders);
+      });
   }
 
   toggle() {

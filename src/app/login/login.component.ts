@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     const res = this.http.post(`${environment.URL_API}/auth/login`, this.user);
     res
       .pipe(
+        first(),
         catchError((err) => {
           return throwError(() => Error(err.error.message));
         })

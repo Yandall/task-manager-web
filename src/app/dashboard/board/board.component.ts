@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { first } from 'rxjs';
 import { BoardsService } from 'src/app/services/board.service';
 import { Board } from 'src/app/shared/types';
 
@@ -18,9 +19,12 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.boardsService.getOne(params['id']).subscribe((value) => {
-        this.board = value;
-      });
+      this.boardsService
+        .getOne(params['id'])
+        .pipe(first())
+        .subscribe((value) => {
+          this.board = value;
+        });
     });
   }
 }

@@ -24,9 +24,12 @@ export class SectionComponent {
       closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onSave.pipe(first()).subscribe((value) => {
-      this.sectionsService.updateSection(value).subscribe((updated) => {
-        this.section.config = updated.config;
-      });
+      this.sectionsService
+        .updateSection(value)
+        .pipe(first())
+        .subscribe((updated) => {
+          this.section.config = updated.config;
+        });
     });
   }
 }

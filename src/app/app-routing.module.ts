@@ -10,9 +10,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
-    canActivate: [LoggedGuard],
-    component: DashboardComponent,
-    children: [{ path: ':id', component: BoardComponent }],
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
 ];
 

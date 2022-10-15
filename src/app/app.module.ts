@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbThemeModule,
   NbLayoutModule,
-  NbSidebarService,
   NbCardModule,
   NbInputModule,
   NbIconModule,
@@ -19,22 +18,18 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
-import { LayoutDefaultModule } from './layouts/default/default.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { FormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
     AppRoutingModule,
-    DashboardModule,
-    LayoutDefaultModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    CoreModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbLayoutModule,
     NbCardModule,
@@ -47,7 +42,7 @@ import { CookieService } from 'ngx-cookie-service';
     NbButtonModule,
     NbCheckboxModule,
   ],
-  providers: [NbSidebarService, CookieService],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

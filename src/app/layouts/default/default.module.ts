@@ -29,13 +29,7 @@ import { LayoutDefaultComponent } from './default.component';
     NbActionsModule,
     NbTreeGridModule,
   ],
-  providers: [
-    FoldersService,
-    BoardsService,
-    SectionsService,
-    NbSidebarService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  ],
+  providers: [FoldersService, BoardsService, SectionsService, NbSidebarService],
   exports: [LayoutDefaultComponent],
 })
 export class LayoutDefaultModule {}

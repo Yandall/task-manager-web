@@ -19,6 +19,7 @@ import { EditSectionComponent } from './board/section/edit-section/edit-section.
 import { FormsModule } from '@angular/forms';
 import { TaskComponent } from './board/task/task.component';
 import { SharedModule } from '../shared/components/shared.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
@@ -29,13 +30,14 @@ import { SharedModule } from '../shared/components/shared.module';
     TaskComponent,
   ],
   imports: [
+    RouterModule,
+    DashboardRoutingModule,
     SharedModule,
     CommonModule,
     FormsModule,
     NbFormFieldModule,
     LayoutDefaultModule,
     NbMenuModule,
-    RouterModule,
     NbCardModule,
     NbInputModule,
     NbButtonModule,

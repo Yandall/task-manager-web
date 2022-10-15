@@ -20,9 +20,11 @@
 
 .add-section-button {
   align-self: center;
-  height: 4rem;
-  width: 4rem;
+  padding: 1.5rem !important;
   background-color: transparent !important;
   border-radius: 5rem;
   border: 4px solid;
+  & > nb-icon {
+    margin: 0;
+  }
 }

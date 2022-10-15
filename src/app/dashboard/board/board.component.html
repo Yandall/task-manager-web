@@ -3,7 +3,13 @@
     *ngFor="let section of board.sections"
     [section]="section"
   ></board-section>
-  <button nbButton status="info" class="add-section-button" shape="round">
+  <button
+    nbButton
+    status="info"
+    class="add-section-button"
+    shape="round"
+    (click)="newBoard()"
+  >
     <nb-icon icon="plus"></nb-icon>
   </button>
 </div>

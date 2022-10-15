@@ -13,6 +13,10 @@ export class SectionsService {
     );
   }
 
+  createSection(data: Section) {
+    return this.http.post<Section>(`${environment.URL_API}/sections`, data);
+  }
+
   updateSection(data: Section) {
     return this.http.put<Section>(
       `${environment.URL_API}/sections/${data.id}`,

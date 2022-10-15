@@ -11,6 +11,7 @@ button {
 nb-card {
   margin: 0;
   border-radius: 1rem;
+  width: var(--board-section-min-width);
 }
 
 nb-card-body::-webkit-scrollbar {

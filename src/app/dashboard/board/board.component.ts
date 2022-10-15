@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
 import { first } from 'rxjs';
 import { BoardsService } from 'src/app/services/board.service';
-import { Board } from 'src/app/shared/types';
+import { SectionsService } from 'src/app/services/section.service';
+import { Board, Section } from 'src/app/shared/types';
+import { EditSectionComponent } from './section/edit-section/edit-section.component';
 
 @Component({
   selector: 'app-board',
@@ -11,10 +14,13 @@ import { Board } from 'src/app/shared/types';
 })
 export class BoardComponent implements OnInit {
   board: Board = {};
+  newSection: Section = { config: { title: '' } };
+
   constructor(
     private boardsService: BoardsService,
-    private router: Router,
-    private route: ActivatedRoute
+    private sectionsService: SectionsService,
+    private route: ActivatedRoute,
+    private dialogService: NbDialogService
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +30,23 @@ export class BoardComponent implements OnInit {
         .pipe(first())
         .subscribe((value) => {
           this.board = value;
+        });
+    });
+  }
+
+  newBoard() {
+    const dialog = this.dialogService.open(EditSectionComponent, {
+      context: { section: this.newSection },
+      closeOnBackdropClick: true,
+    });
+    dialog.componentRef.instance.onSave.pipe(first()).subscribe((value) => {
+      console.log(value);
+      value.boardId = this.board.id;
+      this.sectionsService
+        .createSection(value)
+        .pipe(first())
+        .subscribe((updated) => {
+          this.board.sections?.push(updated);
         });
     });
   }

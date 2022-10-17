@@ -11,6 +11,9 @@
     </div>
   </nb-card-header>
   <nb-card-body>
-    <board-task *ngFor="let task of section.tasks" [task]="task"></board-task>
+    <board-task-item
+      *ngFor="let task of section.tasks"
+      [task]="task"
+    ></board-task-item>
   </nb-card-body>
 </nb-card>

@@ -17,9 +17,11 @@ import { RouterModule } from '@angular/router';
 import { SectionComponent } from './board/section/section.component';
 import { EditSectionComponent } from './board/section/edit-section/edit-section.component';
 import { FormsModule } from '@angular/forms';
-import { TaskComponent } from './board/task/task.component';
+import { TaskItemComponent } from './board/task/task-item/task-item.component';
 import { SharedModule } from '../shared/components/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { TaskComponent } from './board/task/task.component';
+import { TaskEntrypointComponent } from './board/task/task-item/task-entrypoint.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     BoardComponent,
     SectionComponent,
     EditSectionComponent,
+    TaskItemComponent,
     TaskComponent,
+    TaskEntrypointComponent,
   ],
   imports: [
     RouterModule,

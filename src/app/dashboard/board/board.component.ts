@@ -50,4 +50,10 @@ export class BoardComponent implements OnInit {
         });
     });
   }
+
+  removeSection(sectionId: string) {
+    this.board.sections = this.board.sections?.filter(
+      (section) => section.id !== sectionId
+    );
+  }
 }

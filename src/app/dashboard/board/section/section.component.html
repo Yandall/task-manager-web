@@ -1,9 +1,14 @@
 <nb-card>
   <nb-card-header [ngStyle]="{ 'border-top-color': section.config['accent'] }">
     {{ section.config["title"] }}
-    <button (click)="edit()" nbButton status="basic" ghost shape="round">
-      <nb-icon icon="edit"></nb-icon>
-    </button>
+    <div class="row justify-end">
+      <button (click)="edit()" nbButton status="basic" ghost shape="round">
+        <nb-icon icon="edit"></nb-icon>
+      </button>
+      <button (click)="delete()" nbButton status="basic" ghost shape="round">
+        <nb-icon icon="trash-2"></nb-icon>
+      </button>
+    </div>
   </nb-card-header>
   <nb-card-body>
     <board-task *ngFor="let task of section.tasks" [task]="task"></board-task>

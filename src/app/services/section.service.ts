@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Section } from '../shared/types';
 
@@ -22,5 +23,11 @@ export class SectionsService {
       `${environment.URL_API}/sections/${data.id}`,
       data
     );
+  }
+
+  deleteSection(sectionId: string) {
+    return this.http
+      .delete<boolean>(`${environment.URL_API}/sections/${sectionId}`)
+      .pipe(map(() => true));
   }
 }

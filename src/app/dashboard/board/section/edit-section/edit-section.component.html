@@ -20,9 +20,18 @@
       </nb-form-field>
       <div class="row justify-end">
         <button nbButton status="primary" type="submit">
+          Save
           <nb-icon icon="save"></nb-icon>
         </button>
-        <button nbButton status="basic" type="button" ghost (click)="close()">
+        <button
+          nbButton
+          status="basic"
+          type="button"
+          ghost
+          outline
+          (click)="close()"
+        >
+          Cancel
           <nb-icon icon="close"></nb-icon>
         </button>
       </div>

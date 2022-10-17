@@ -2,6 +2,7 @@
   <board-section
     *ngFor="let section of board.sections"
     [section]="section"
+    (deleted)="removeSection($event)"
   ></board-section>
   <button
     nbButton

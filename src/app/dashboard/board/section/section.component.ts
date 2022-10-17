@@ -6,8 +6,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { NbDialogRef, NbDialogService } from '@nebular/theme';
-import { first, interval, Subscription } from 'rxjs';
+import { NbDialogService } from '@nebular/theme';
+import { first } from 'rxjs';
 import { SectionsService } from 'src/app/services/section.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { Section } from 'src/app/shared/types';
@@ -20,7 +20,7 @@ import { EditSectionComponent } from './edit-section/edit-section.component';
 })
 export class SectionComponent {
   @Input()
-  section: Section = { config: { title: '' } };
+  section: Partial<Section> = { config: {} };
 
   @Output()
   deleted = new EventEmitter<string>();

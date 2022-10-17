@@ -9,9 +9,7 @@ import { Section } from 'src/app/shared/types';
   styleUrls: ['./edit-section.component.scss'],
 })
 export class EditSectionComponent implements OnInit {
-  section: Section = {
-    config: { title: '' },
-  };
+  section: Partial<Section> = {};
   editConfig: { [key: string]: any } = {
     title: '',
     accentColor: '',
@@ -26,7 +24,7 @@ export class EditSectionComponent implements OnInit {
   }
 
   save() {
-    this.onSave.next({ ...this.section, config: this.editConfig });
+    this.onSave.next({ ...(this.section as Section), config: this.editConfig });
     this.dialogRef.close();
   }
 

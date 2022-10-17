@@ -8,7 +8,7 @@ import { Task } from 'src/app/shared/types';
 })
 export class TaskItemComponent implements OnInit {
   @Input()
-  task: Task = { config: {}, content: {} };
+  task: Partial<Task> = { content: {} };
   constructor() {}
 
   ngOnInit(): void {}

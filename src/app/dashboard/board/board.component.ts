@@ -13,8 +13,8 @@ import { EditSectionComponent } from './section/edit-section/edit-section.compon
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  board: Board = {};
-  newSection: Section = { config: { title: '' } };
+  board: Partial<Board> = {};
+  newSection: Partial<Section> = {};
 
   constructor(
     private boardsService: BoardsService,
@@ -36,12 +36,11 @@ export class BoardComponent implements OnInit {
 
   newBoard() {
     const dialog = this.dialogService.open(EditSectionComponent, {
-      context: { section: this.newSection },
+      context: { section: this.newSection as Section },
       closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onSave.pipe(first()).subscribe((value) => {
-      console.log(value);
-      value.boardId = this.board.id;
+      value.boardId = this.board.id!;
       this.sectionsService
         .createSection(value)
         .pipe(first())

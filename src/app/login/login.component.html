@@ -3,31 +3,38 @@
     <h1>The Game</h1>
     <nb-card>
       <nb-card-body>
-        <form (ngSubmit)="login()">
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
           <nb-form-field>
             <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
             <input
               type="text"
-              placeholder="Email"
+              placeholder=" "
               nbInput
               fullWidth
               name="email"
-              #name="ngModel"
-              [(ngModel)]="user.email"
+              id="email"
+              formControlName="email"
             />
+            <label for="email">Email</label>
+            <span class="error-message" *ngIf="isControlValid('email')"
+              >Invalid email</span
+            >
           </nb-form-field>
           <nb-form-field>
             <nb-icon nbPrefix icon="lock"></nb-icon>
             <input
-              type="text"
-              placeholder="Password"
+              type="password"
+              placeholder=" "
               nbInput
               fullWidth
               name="password"
-              #name="ngModel"
-              [(ngModel)]="user.password"
-              type="password"
+              id="password"
+              formControlName="password"
             />
+            <label for="password">Password</label>
+            <span class="error-message" *ngIf="isControlValid('password')"
+              >Required password</span
+            >
           </nb-form-field>
           <div class="row">
             <button
@@ -38,12 +45,18 @@
             >
               Register
             </button>
-            <button nbButton status="basic" type="submit">Log in</button>
+            <button
+              nbButton
+              status="basic"
+              type="submit"
+              [disabled]="!isFormValid"
+            >
+              Log in
+            </button>
             <nb-checkbox
               status="basic"
               name="keepLogged"
-              #name="ngModel"
-              [(ngModel)]="user.keepLogged"
+              formControlName="keepLogged"
               >Keep Logged</nb-checkbox
             >
           </div>

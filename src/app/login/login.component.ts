@@ -1,21 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, first, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  user: { email: string; password: string; keepLogged: boolean } = {
-    email: '',
-    password: '',
-    keepLogged: false,
-  };
+  loginForm: FormGroup;
 
   constructor(
     private http: HttpClient,
@@ -24,6 +21,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
     const token = this.cookieService.get('token');
     if (!token) return;
     const res = this.http.get(`${environment.URL_API}/auth/valid`, {
@@ -43,7 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const res = this.http.post(`${environment.URL_API}/auth/login`, this.user);
+    if (!this.isFormValid) return;
+    const user = this.loginForm.value;
+    const res = this.http.post(`${environment.URL_API}/auth/login`, user);
     res
       .pipe(
         first(),
@@ -59,5 +59,24 @@ export class LoginComponent implements OnInit {
 
   register() {
     console.log('demasiado registrado');
+  }
+
+  get isFormValid() {
+    return this.loginForm.status === 'VALID';
+  }
+
+  isControlValid(control: string) {
+    return (
+      this.loginForm.controls[control]?.errors &&
+      this.loginForm.controls[control]?.touched
+    );
+  }
+
+  initForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      keepLogged: new FormControl(false),
+    });
   }
 }

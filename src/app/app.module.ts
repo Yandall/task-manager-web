@@ -18,7 +18,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
@@ -28,6 +28,7 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     CoreModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),

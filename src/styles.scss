@@ -27,14 +27,85 @@ nb-sidebar > * {
 
 .row {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.row.justify-end {
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.justify-end {
   justify-content: flex-end;
 }
 
-.row.justify-start {
+.justify-start {
   justify-content: start;
+}
+
+.stretch {
+  align-items: stretch;
+}
+
+.row.fill {
+  width: 100%;
+}
+
+.col.fill {
+  height: 100%;
+}
+
+nb-card-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+nb-card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+nb-card-body::-webkit-scrollbar-thumb {
+  background-color: var(--border-primary-color-1);
+  border-radius: 20px;
+}
+
+.ng-touched.ng-invalid {
+  border-color: var(--input-danger-border-color);
+}
+
+@supports (not (-ms-ime-align: auto)) {
+  .nb-form-field-control-with-prefix {
+    & > label {
+      transform: translate(2.5rem, -3.5rem);
+    }
+  }
+
+  input + label {
+    display: block;
+    position: absolute;
+    color: var(--text-hint-color);
+    transform: translate(1rem, -3.5rem);
+    transition: all 0.2s ease-out;
+  }
+
+  input:has(+ label) {
+    margin: 25px 0;
+  }
+
+  input:not(:placeholder-shown) + label {
+    transform: translate(0, -5.6rem);
+    font-weight: lighter;
+  }
+
+  label + span.error-message {
+    display: block;
+    position: absolute;
+    font-weight: lighter;
+    font-size: var(--input-small-text-font-size);
+    color: var(--text-danger-color);
+    transform: translate(0, -1.5rem);
+  }
 }

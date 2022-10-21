@@ -25,8 +25,8 @@ export type Task = {
   dueDate: string;
   owner: number;
   sectionId: string;
-  config: { [key: string]: any };
-  content: { [key: string]: any };
+  config: { tags: Tag[]; [key: string]: any };
+  content: { title: string; description: string };
   isDeleted: boolean;
 };
 
@@ -38,4 +38,13 @@ export type Section = {
   owner: number;
   config: { [key: string]: any };
   tasks: Task[];
+};
+
+export type Tag = {
+  id: string;
+  name: string;
+  color: string;
+  owner: number;
+  createdDate: string;
+  updatedDate: string;
 };

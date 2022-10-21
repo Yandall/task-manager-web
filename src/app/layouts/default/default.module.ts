@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
@@ -11,10 +10,10 @@ import {
   NbSidebarService,
   NbTreeGridModule,
 } from '@nebular/theme';
-import { AuthInterceptor } from 'src/app/interceptors/auth-interceptor';
 import { BoardsService } from 'src/app/services/board.service';
 import { FoldersService } from 'src/app/services/folder.service';
 import { SectionsService } from 'src/app/services/section.service';
+import { TasksService } from 'src/app/services/task.service';
 import { LayoutDefaultComponent } from './default.component';
 
 @NgModule({
@@ -29,7 +28,13 @@ import { LayoutDefaultComponent } from './default.component';
     NbActionsModule,
     NbTreeGridModule,
   ],
-  providers: [FoldersService, BoardsService, SectionsService, NbSidebarService],
+  providers: [
+    FoldersService,
+    BoardsService,
+    SectionsService,
+    TasksService,
+    NbSidebarService,
+  ],
   exports: [LayoutDefaultComponent],
 })
 export class LayoutDefaultModule {}

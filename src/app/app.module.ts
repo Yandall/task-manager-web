@@ -15,6 +15,8 @@ import {
   NbCheckboxModule,
   NbMenuModule,
   NbDialogModule,
+  NbToastrModule,
+  NbGlobalPhysicalPosition,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
@@ -40,6 +42,9 @@ import { CoreModule } from './core/core.module';
     NbIconModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot({ closeOnEsc: false, closeOnBackdropClick: false }),
+    NbToastrModule.forRoot({
+      position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+    }),
     NbButtonModule,
     NbCheckboxModule,
   ],

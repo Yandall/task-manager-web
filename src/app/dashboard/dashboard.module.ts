@@ -16,7 +16,7 @@ import { BoardComponent } from './board/board.component';
 import { RouterModule } from '@angular/router';
 import { SectionComponent } from './board/section/section.component';
 import { EditSectionComponent } from './board/section/edit-section/edit-section.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskItemComponent } from './board/task/task-item/task-item.component';
 import { SharedModule } from '../shared/components/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -39,6 +39,7 @@ import { TaskEntrypointComponent } from './board/task/task-item/task-entrypoint.
     SharedModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NbFormFieldModule,
     LayoutDefaultModule,
     NbMenuModule,

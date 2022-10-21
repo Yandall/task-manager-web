@@ -3,6 +3,10 @@
   margin: var(--board-section-margin);
 }
 
+#section-title {
+  overflow-wrap: anywhere;
+}
+
 button {
   margin: 0 !important;
 }
@@ -12,19 +16,6 @@ nb-card {
   border-radius: 1rem;
   height: 80vh;
   width: var(--board-section-min-width);
-}
-
-nb-card-body::-webkit-scrollbar {
-  width: 8px;
-}
-
-nb-card-body::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-nb-card-body::-webkit-scrollbar-thumb {
-  background-color: var(--border-primary-color-1);
-  border-radius: 20px;
 }
 
 nb-card-header {

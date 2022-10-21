@@ -25,9 +25,9 @@ export class SectionsService {
     );
   }
 
-  deleteSection(sectionId: string) {
+  deleteSection(id: string) {
     return this.http
-      .delete<boolean>(`${environment.URL_API}/sections/${sectionId}`)
+      .delete<boolean>(`${environment.URL_API}/sections/${id}`)
       .pipe(map(() => true));
   }
 }

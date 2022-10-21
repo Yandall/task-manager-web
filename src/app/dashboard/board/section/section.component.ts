@@ -20,7 +20,7 @@ import { EditSectionComponent } from './edit-section/edit-section.component';
 })
 export class SectionComponent {
   @Input()
-  section: Partial<Section> = { config: {} };
+  section: Section;
 
   @Output()
   deleted = new EventEmitter<string>();

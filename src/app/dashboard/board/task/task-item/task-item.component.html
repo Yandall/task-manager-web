@@ -1,20 +1,22 @@
 <nb-card>
   <nb-card-body>
-    <div class="row">
+    <div class="row justify-start">
       <p>
         {{ task.content!["title"] }}
       </p>
+      <button nbButton status="danger" type="submit" ghost size="small">
+        <nb-icon icon="trash"></nb-icon>
+      </button>
     </div>
     <div class="row justify-start">
       <nb-tag-list>
         <nb-tag
-          status="warning"
+          *ngFor="let tag of task?.config?.tags"
           appearance="outline"
-          text="mucho texto"
+          [text]="tag.name"
+          size="tiny"
+          [ngStyle]="{ color: tag.color, 'border-color': tag.color }"
         ></nb-tag>
-        <nb-tag status="primary" appearance="outline" text="basic"></nb-tag>
-        <nb-tag status="danger" appearance="outline" text="basic"></nb-tag>
-        <nb-tag status="basic" appearance="outline" text="basic"></nb-tag>
       </nb-tag-list>
     </div>
   </nb-card-body>

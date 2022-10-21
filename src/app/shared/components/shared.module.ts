@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   NbButtonModule,
@@ -11,6 +11,7 @@ import {
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { EditDialogComponent } from './color-picker/edit-color-picker/edit-color-picker.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { MarkdownModule } from './markdown/markdown.module';
 
 @NgModule({
   declarations: [ColorPickerComponent, EditDialogComponent, DialogComponent],
@@ -21,8 +22,9 @@ import { DialogComponent } from './dialog/dialog.component';
     NbButtonModule,
     NbDialogModule,
     NbCardModule,
+    MarkdownModule,
   ],
   providers: [NbDialogService],
-  exports: [ColorPickerComponent],
+  exports: [ColorPickerComponent, MarkdownModule],
 })
 export class SharedModule {}

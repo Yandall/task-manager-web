@@ -1,10 +1,17 @@
 <nb-card>
-  <nb-card-body>
+  <nb-card-body (click)="edit()">
     <div class="row justify-start">
       <p>
         {{ task.content!["title"] }}
       </p>
-      <button nbButton status="danger" type="submit" ghost size="small">
+      <button
+        nbButton
+        status="danger"
+        type="submit"
+        ghost
+        size="small"
+        (click)="remove()"
+      >
         <nb-icon icon="trash"></nb-icon>
       </button>
     </div>

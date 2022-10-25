@@ -16,7 +16,7 @@ import { Tag, Task } from 'src/app/shared/types';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit {
-  id = '';
+  id: string;
   task: Task;
   contentForm: FormGroup;
   editing = true;
@@ -28,13 +28,14 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.tasksService
-      .getOne(this.id)
-      .pipe(first())
-      .subscribe((value) => {
-        this.task = value;
-        this.contentForm.setValue({ ...value.content });
-      });
+    if (this.editing && this.id)
+      this.tasksService
+        .getOne(this.id)
+        .pipe(first())
+        .subscribe((value) => {
+          this.task = value;
+          this.contentForm.setValue({ ...value.content });
+        });
   }
 
   save() {
@@ -49,7 +50,9 @@ export class TaskComponent implements OnInit {
       .pipe(first())
       .subscribe((value) => {
         this.task = value;
-        this.toastrService.show('Task updated succesfully', 'Status', {
+        const status = this.editing ? 'updated' : 'created';
+        this.editing = true;
+        this.toastrService.show(`Task ${status} succesfully`, 'Status', {
           status: 'success',
         });
       });

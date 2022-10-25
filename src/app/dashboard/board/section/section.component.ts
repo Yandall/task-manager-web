@@ -10,7 +10,8 @@ import { NbDialogService } from '@nebular/theme';
 import { first } from 'rxjs';
 import { SectionsService } from 'src/app/services/section.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { Section } from 'src/app/shared/types';
+import { Section, Task } from 'src/app/shared/types';
+import { TaskComponent } from '../task/task.component';
 import { EditSectionComponent } from './edit-section/edit-section.component';
 
 @Component({
@@ -64,5 +65,20 @@ export class SectionComponent {
           this.deleted.emit(this.section.id);
         });
     });
+  }
+
+  newTask() {
+    const partialTask: Partial<Task> = {
+      config: { tags: [] },
+      content: { title: '', description: '' },
+      sectionId: this.section.id,
+    };
+    const dialog = this.dialogService.open(TaskComponent, {
+      context: { editing: false, task: partialTask as Task },
+    });
+  }
+
+  deleteTask(task: Task) {
+    this.section.tasks = this.section.tasks.filter((t) => t.id !== task.id);
   }
 }

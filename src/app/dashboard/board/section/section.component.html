@@ -26,9 +26,8 @@
   </nb-card-header>
   <nb-card-body>
     <board-task-item
-      *ngFor="let task of section.tasks"
+      *ngFor="let task of tasks$ | async"
       [task]="task"
-      (delete)="deleteTask($event)"
     ></board-task-item>
     <button
       (click)="newTask()"

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { first } from 'rxjs';
+import { first, Observable, tap } from 'rxjs';
 import { BoardsService } from 'src/app/services/board.service';
 import { SectionsService } from 'src/app/services/section.service';
 import { Board, Section } from 'src/app/shared/types';
@@ -13,8 +13,9 @@ import { EditSectionComponent } from './section/edit-section/edit-section.compon
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  board: Partial<Board> = {};
-  newSection: Partial<Section> = {};
+  private board: Board;
+  board$: Observable<Board | undefined>;
+  sections$: Observable<Section[]>;
 
   constructor(
     private boardsService: BoardsService,
@@ -25,34 +26,23 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.boardsService
-        .getOne(params['id'])
-        .pipe(first())
-        .subscribe((value) => {
-          this.board = value;
-        });
+      this.board$ = this.boardsService.selectBoard(params['id']).pipe(
+        tap((board) => {
+          if (!board) return;
+          this.board = board;
+          this.sections$ = this.sectionsService.getSectionsByBoard(board.id);
+        })
+      );
     });
   }
 
   newBoard() {
     const dialog = this.dialogService.open(EditSectionComponent, {
-      context: { section: this.newSection as Section },
+      context: { section: { boardId: this.board.id } as Section },
       closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onSave.pipe(first()).subscribe((value) => {
-      value.boardId = this.board.id!;
-      this.sectionsService
-        .createSection(value)
-        .pipe(first())
-        .subscribe((updated) => {
-          this.board.sections?.push(updated);
-        });
+      this.sectionsService.addSection(value);
     });
-  }
-
-  removeSection(sectionId: string) {
-    this.board.sections = this.board.sections?.filter(
-      (section) => section.id !== sectionId
-    );
   }
 }

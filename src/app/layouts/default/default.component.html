@@ -9,7 +9,9 @@
   </nb-layout-header>
 
   <nb-sidebar state="compacted" (click)="expand()">
-    <nb-menu [items]="menuItems"></nb-menu>
+    <div *ngIf="menuItems$ | async as items">
+      <nb-menu [items]="items"></nb-menu>
+    </div>
   </nb-sidebar>
   <nb-layout-column>
     <div

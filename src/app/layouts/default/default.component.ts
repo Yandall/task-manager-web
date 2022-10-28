@@ -1,8 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NbMenuItem, NbSidebarService } from '@nebular/theme';
-import { first } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
+import { BoardsService } from 'src/app/services/board.service';
 import { FoldersService } from 'src/app/services/folder.service';
-import { Folder } from 'src/app/shared/types';
+import { SectionsService } from 'src/app/services/section.service';
+import { TasksService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'layout-default',
@@ -10,27 +12,23 @@ import { Folder } from 'src/app/shared/types';
   styleUrls: ['default.component.scss'],
 })
 export class LayoutDefaultComponent implements OnInit {
+  menuItems$: Observable<NbMenuItem[]>;
   sidebarOpen = false;
   resizing = false;
-  foldersMenuItem: NbMenuItem = {
-    title: 'Folders',
-    icon: 'folder',
-    children: [],
-  };
-
-  menuItems: NbMenuItem[] = [this.foldersMenuItem];
 
   constructor(
     private foldersService: FoldersService,
+    private boardsService: BoardsService,
+    private sectionsService: SectionsService,
+    private tasksService: TasksService,
     private sidebarService: NbSidebarService
   ) {}
   ngOnInit() {
-    this.foldersService
-      .getAll()
-      .pipe(first())
-      .subscribe((folders) => {
-        this.formatFoldersStructure(folders);
-      });
+    this.boardsService.fetchBoards();
+    this.foldersService.fetchFolders();
+    this.sectionsService.fetchSections();
+    this.tasksService.fetchTasks();
+    this.menuItems$ = this.formatFoldersStructure();
   }
 
   toggle() {
@@ -43,26 +41,34 @@ export class LayoutDefaultComponent implements OnInit {
     this.sidebarOpen = true;
   }
 
-  formatFoldersStructure(folders: Folder[]) {
-    folders.forEach((folder) => {
-      const folderItem: NbMenuItem = {
-        title: folder.name!,
-        icon: folder.config!['icon'] || 'arrowhead-right',
-        children: [],
-      };
-      const boardsItems = folder.boards!.filter(
-        (board) => board.folderId === folder.id
-      );
-      boardsItems.forEach((board) => {
-        folderItem.children?.push({
-          title: board.name!,
-          icon: board.config!['icon'] || 'layout',
-          link: board.id,
-          badge: { text: '🙃', status: 'primary' },
+  formatFoldersStructure() {
+    return this.foldersService.getAllFolders().pipe(
+      first((folders) => folders.length > 0),
+      map((folders) => {
+        const folderMenuItem: NbMenuItem = {
+          title: 'Folders',
+          icon: 'folder',
+          children: [],
+        };
+        folders.forEach((folder) => {
+          const folderItem: NbMenuItem = {
+            title: folder.name,
+            icon: folder.config['icon'] || 'arrowhead-right',
+            children: [],
+          };
+          folder.boards.forEach((board) => {
+            folderItem.children?.push({
+              title: board.name,
+              icon: board.config['icon'] || 'layout',
+              link: board.id,
+              badge: { text: '🙃', status: 'primary' },
+            });
+          });
+          folderMenuItem.children!.push(folderItem);
         });
-      });
-      this.foldersMenuItem.children?.push(folderItem);
-    });
+        return [folderMenuItem] as NbMenuItem[];
+      })
+    );
   }
 
   @HostListener('window:mousemove', ['$event'])

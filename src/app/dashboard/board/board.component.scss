@@ -1,3 +1,7 @@
+h1 {
+  margin: 1rem var(--board-section-margin);
+}
+
 .board-layout {
   display: flex;
   flex-direction: row;

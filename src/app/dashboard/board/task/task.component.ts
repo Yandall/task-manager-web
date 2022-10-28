@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { first } from 'rxjs';
 import { TasksService } from 'src/app/services/task.service';
@@ -17,24 +13,29 @@ import { Tag, Task } from 'src/app/shared/types';
 })
 export class TaskComponent implements OnInit {
   id: string;
-  task: Task;
+  task: Partial<Task> = {
+    content: { title: '', description: '' },
+    config: { tags: [] },
+  };
   contentForm: FormGroup;
   editing = true;
   constructor(
     private tasksService: TasksService,
     private dialogRef: NbDialogRef<TaskComponent>,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     if (this.editing && this.id)
       this.tasksService
-        .getOne(this.id)
-        .pipe(first())
-        .subscribe((value) => {
-          this.task = value;
-          this.contentForm.setValue({ ...value.content });
+        .selectTask(this.id)
+        .pipe(first((task) => Boolean(task)))
+        .subscribe((task) => {
+          if (task) this.task = { ...task };
+          this.contentForm.setValue({ ...this.task.content });
         });
   }
 
@@ -44,14 +45,14 @@ export class TaskComponent implements OnInit {
     const service = this.editing
       ? this.tasksService.update
       : this.tasksService.create;
-
     service
-      .bind(this.tasksService)(this.task)
+      .bind(this.tasksService)(this.task as Task)
       .pipe(first())
-      .subscribe((value) => {
-        this.task = value;
+      .subscribe((task) => {
+        this.task = { ...task };
+        if (!this.editing)
+          this.router.navigate([`${task.id}`], { relativeTo: this.route });
         const status = this.editing ? 'updated' : 'created';
-        this.editing = true;
         this.toastrService.show(`Task ${status} succesfully`, 'Status', {
           status: 'success',
         });
@@ -59,9 +60,8 @@ export class TaskComponent implements OnInit {
   }
 
   removeTag(tag: Tag) {
-    this.task.config.tags = this.task.config.tags.filter(
-      (t) => t.id !== tag.id
-    );
+    this.task.config!.tags =
+      this.task.config?.tags.filter((t) => t.id !== tag.id) || [];
   }
 
   close() {

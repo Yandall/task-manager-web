@@ -1,17 +1,21 @@
-<div class="board-layout" *ngIf="board.config">
-  <board-section
-    *ngFor="let section of board.sections"
-    [section]="section"
-    (deleted)="removeSection($event)"
-  ></board-section>
-  <button
-    nbButton
-    status="info"
-    class="add-section-button"
-    shape="round"
-    (click)="newBoard()"
-  >
-    <nb-icon icon="plus"></nb-icon>
-  </button>
+<div class="board-layout" *ngIf="board$ | async as board">
+  <div class="col align-start justify-start">
+    <h1>{{ board.name }}</h1>
+    <div class="row">
+      <board-section
+        *ngFor="let section of sections$ | async"
+        [section]="section"
+      ></board-section>
+      <button
+        nbButton
+        status="info"
+        class="add-section-button"
+        shape="round"
+        (click)="newBoard()"
+      >
+        <nb-icon icon="plus"></nb-icon>
+      </button>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>

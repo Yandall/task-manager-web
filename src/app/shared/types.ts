@@ -1,50 +1,49 @@
-export type Folder = {
+export interface Entity {
   id: string;
-  name: string;
   owner: number;
-  config: { [key: string]: any };
   createdDate: string;
   updatedDate: string;
-  boards: Board[];
-};
+  isDeleted: boolean;
+}
 
-export type Board = {
-  id: string;
+export interface Folder extends Entity {
+  name: string;
+  config: { [key: string]: any };
+  boards: Board[];
+}
+
+export interface Board extends Entity {
   folderId: string;
   config: { [key: string]: any };
-  owner: number;
   name: string;
-  createdDate: string;
-  updatedDate: string;
   sections: Section[];
-};
+}
 
-export type Task = {
-  id: string;
-  createdDate: string;
+export interface Task extends Entity {
   dueDate: string;
-  owner: number;
   sectionId: string;
   config: { tags: Tag[]; [key: string]: any };
   content: { title: string; description: string };
-  isDeleted: boolean;
-};
+}
 
-export type Section = {
-  id: string;
+export interface Section extends Entity {
   boardId: string;
-  createdDate: string;
-  updatedDate: string;
-  owner: number;
   config: { [key: string]: any };
   tasks: Task[];
-};
+}
 
-export type Tag = {
-  id: string;
+export interface Tag extends Entity {
   name: string;
   color: string;
-  owner: number;
+}
+
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  config: { [key: string]: any };
   createdDate: string;
   updatedDate: string;
-};
+  isActive: boolean;
+  token: string;
+}

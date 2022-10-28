@@ -19,7 +19,11 @@ export class EditSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.sectionForm.setValue({ ...this.section.config });
+    this.sectionForm.setValue({
+      title: '',
+      accent: '',
+      ...this.section.config,
+    });
   }
 
   save() {

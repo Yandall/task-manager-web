@@ -16,8 +16,6 @@ export class TaskItemComponent implements OnInit {
   @Input()
   task: Task;
 
-  @Output()
-  delete = new EventEmitter<Task>();
   constructor(
     private tasksService: TasksService,
     private router: Router,
@@ -46,12 +44,7 @@ export class TaskItemComponent implements OnInit {
     });
     dialog.componentRef.instance.onAction.pipe(first()).subscribe((value) => {
       if (value) {
-        this.tasksService
-          .delete(this.task.id)
-          .pipe(first())
-          .subscribe((v) => {
-            this.delete.emit(this.task);
-          });
+        this.tasksService.delete(this.task.id);
       }
     });
   }

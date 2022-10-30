@@ -32,7 +32,6 @@ export class SectionComponent implements OnInit {
   edit() {
     const dialog = this.dialogService.open(EditSectionComponent, {
       context: { section: this.section },
-      closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onSave.pipe(first()).subscribe((section) => {
       this.sectionsService.updateSection(section);
@@ -46,7 +45,6 @@ export class SectionComponent implements OnInit {
         message: `Are you sure you want to delete this section? You can't restore it later.`,
         actions: true,
       },
-      closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onAction.pipe(first()).subscribe((value) => {
       if (!value) return;

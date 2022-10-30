@@ -36,10 +36,9 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  newBoard() {
+  newSection() {
     const dialog = this.dialogService.open(EditSectionComponent, {
       context: { section: { boardId: this.board.id } as Section },
-      closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onSave.pipe(first()).subscribe((value) => {
       this.sectionsService.addSection(value);

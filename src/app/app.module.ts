@@ -47,7 +47,7 @@ import { environment } from 'src/environments/environment';
     NbInputModule,
     NbIconModule,
     NbMenuModule.forRoot(),
-    NbDialogModule.forRoot({ closeOnEsc: false, closeOnBackdropClick: false }),
+    NbDialogModule.forRoot({ closeOnEsc: false, closeOnBackdropClick: true }),
     NbToastrModule.forRoot({
       position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
     }),

@@ -13,7 +13,6 @@ export function genericAdd<T extends _stateTypes, R extends Entity>(
   const stateList = state.list as ReadonlyArray<Entity>;
   if (stateList.find((i) => i.id === item.id)) return state;
   const list = [...stateList, item];
-  debugger;
   return { ...state, list };
 }
 

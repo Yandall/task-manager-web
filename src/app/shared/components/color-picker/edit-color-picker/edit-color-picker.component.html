@@ -1,4 +1,8 @@
 <div id="container">
+  <div
+    id="selected-color"
+    [ngStyle]="{ 'background-color': pickerColor }"
+  ></div>
   <li>
     <ul
       *ngFor="let color of colorsList"

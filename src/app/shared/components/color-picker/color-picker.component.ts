@@ -54,8 +54,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
   edit() {
     const compRef = this.dialogService.open(EditDialogComponent, {
       closeOnEsc: true,
-      closeOnBackdropClick: true,
-      hasBackdrop: true,
+      context: { pickerColor: this.colorControl.value },
     });
     const subscription = compRef.componentRef.instance.colorSelected.subscribe(
       (value) => {

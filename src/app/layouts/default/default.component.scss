@@ -18,3 +18,15 @@ button {
   margin: -2.25rem;
   background-color: var(--border-primary-color-1);
 }
+
+@media (max-width: 991.98px) {
+  .divider {
+    margin: -1.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .divider {
+    margin: -1rem;
+  }
+}

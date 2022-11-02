@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Event, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { first } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { TagsService } from 'src/app/services/tag.service';
 import { TasksService } from 'src/app/services/task.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-import { Task } from 'src/app/shared/types';
+import { Tag, Task } from 'src/app/shared/types';
 
 @Component({
   selector: 'board-task-item',
@@ -16,14 +17,19 @@ export class TaskItemComponent implements OnInit {
   @Input()
   task: Task;
 
+  tags$: Observable<Tag[]>;
+
   constructor(
     private tasksService: TasksService,
+    private tagsService: TagsService,
+    private dialogService: NbDialogService,
     private router: Router,
-    private route: ActivatedRoute,
-    private dialogService: NbDialogService
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tags$ = this.tagsService.getTagsById(this.task.config.tags);
+  }
 
   edit() {
     if (!this.deleteClicked)
@@ -31,7 +37,7 @@ export class TaskItemComponent implements OnInit {
     this.deleteClicked = false;
   }
 
-  async remove() {
+  remove() {
     this.deleteClicked = true;
     const dialog = this.dialogService.open(DialogComponent, {
       context: {
@@ -40,7 +46,6 @@ export class TaskItemComponent implements OnInit {
           "Are you sure you want to delete this task? You can't restore it later.",
         actions: true,
       },
-      closeOnBackdropClick: true,
     });
     dialog.componentRef.instance.onAction.pipe(first()).subscribe((value) => {
       if (value) {

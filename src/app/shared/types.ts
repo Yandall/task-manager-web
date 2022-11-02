@@ -22,7 +22,7 @@ export interface Board extends Entity {
 export interface Task extends Entity {
   dueDate: string;
   sectionId: string;
-  config: { tags: Tag[]; [key: string]: any };
+  config: { tags: string[]; [key: string]: any };
   content: { title: string; description: string };
 }
 

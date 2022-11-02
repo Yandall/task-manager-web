@@ -11,16 +11,15 @@
       />
       <label for="title">Title</label>
 
-      <nb-tag-list>
+      <nb-tag-list *ngIf="tags$ | async as tags">
         <nb-tag
-          *ngFor="let tag of task?.config?.tags"
+          *ngFor="let tag of tags"
           appearance="outline"
           [text]="tag.name"
-          removable
-          (remove)="removeTag(tag)"
           [ngStyle]="{ color: tag.color, 'border-color': tag.color }"
         ></nb-tag>
       </nb-tag-list>
+
       <button
         nbButton
         status="info"
@@ -29,6 +28,7 @@
         shape="round"
         size="small"
         type="button"
+        (click)="openTagMenu()"
       >
         <nb-icon icon="pricetags"></nb-icon>
       </button>

@@ -13,6 +13,7 @@ import {
 import { BoardsService } from 'src/app/services/board.service';
 import { FoldersService } from 'src/app/services/folder.service';
 import { SectionsService } from 'src/app/services/section.service';
+import { TagsService } from 'src/app/services/tag.service';
 import { TasksService } from 'src/app/services/task.service';
 import { LayoutDefaultComponent } from './default.component';
 
@@ -33,6 +34,7 @@ import { LayoutDefaultComponent } from './default.component';
     BoardsService,
     SectionsService,
     TasksService,
+    TagsService,
     NbSidebarService,
   ],
   exports: [LayoutDefaultComponent],

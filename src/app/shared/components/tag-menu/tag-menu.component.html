@@ -1,0 +1,90 @@
+<div id="container">
+  <nb-card *ngIf="tagsSelected$ | async as tagsSelected">
+    <nb-card-header>
+      Selected:
+      <nb-tag-list>
+        <nb-tag
+          *ngFor="let tag of tagsSelected"
+          appearance="outline"
+          [text]="tag.name"
+          removable
+          (remove)="removeTag(tag)"
+          (click)="selectTag(tag)"
+          [ngStyle]="{ color: tag.color, 'border-color': tag.color }"
+        ></nb-tag>
+      </nb-tag-list>
+    </nb-card-header>
+    <nb-card-body>
+      Available:
+      <nb-tag-list>
+        <nb-tag
+          *ngFor="let tag of getAvailableTags() | async as tags"
+          appearance="outline"
+          [text]="tag.name"
+          (click)="addTag(tag)"
+          [ngStyle]="{ color: tag.color, 'border-color': tag.color }"
+        ></nb-tag>
+      </nb-tag-list>
+      <button
+        nbButton
+        status="info"
+        ghost
+        outline
+        shape="round"
+        size="small"
+        type="button"
+        (click)="selectTag({ id: '', name: '', color: '' }, false)"
+      >
+        <nb-icon icon="plus"></nb-icon>
+      </button>
+    </nb-card-body>
+    <nb-card-footer>
+      <form [formGroup]="tagForm" (ngSubmit)="saveTag()">
+        <nb-form-field>
+          <div class="row">
+            <label>{{ editing ? "Update" : "New" }}</label>
+            <input
+              type="text"
+              placeholder=" "
+              nbInput
+              fullWidth
+              name="name"
+              id="name"
+              formControlName="name"
+            />
+            <color-picker formControlName="color"></color-picker>
+            <button
+              nbButton
+              status="primary"
+              type="submit"
+              [disabled]="tagForm.status !== 'VALID'"
+            >
+              <nb-icon icon="save"></nb-icon>
+            </button>
+            <button
+              nbButton
+              status="primary"
+              type="button"
+              (click)="deleteTag()"
+            >
+              <nb-icon icon="trash"></nb-icon>
+            </button>
+          </div>
+        </nb-form-field>
+      </form>
+      <div class="row justify-end">
+        <button
+          nbButton
+          status="basic"
+          type="button"
+          ghost
+          outline
+          (click)="close()"
+        >
+          Close
+          <nb-icon icon="close"></nb-icon>
+        </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</div>

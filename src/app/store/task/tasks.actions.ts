@@ -16,10 +16,12 @@ export const updateTask = createAction(
   props<{ task: Task }>()
 );
 
-export const activeTask = createAction(
-  '[Task State] Active Task',
+export const setActiveTask = createAction(
+  '[Task State] Set Active Task',
   props<{ task: Partial<Task> }>()
 );
+
+export const clearActiveTask = createAction('[Task State] Clear Active Task');
 
 export const fetchTasks = createAction(
   '[Task State] Fetch Tasks',

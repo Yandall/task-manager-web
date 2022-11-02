@@ -6,11 +6,12 @@ import { environment } from 'src/environments/environment';
 import { Task } from '../shared/types';
 import { AppState } from '../store/app.reducer';
 import {
-  activeTask,
+  setActiveTask,
   addTask,
   fetchTasks,
   removeTask,
   updateTask,
+  clearActiveTask,
 } from '../store/task/tasks.actions';
 import { selectTask, selectTaskBySection } from '../store/task/tasks.selectors';
 
@@ -34,9 +35,13 @@ export class TasksService {
   selectTask(taskId: string) {
     return this.store.select(selectTask(taskId)).pipe(
       tap((task) => {
-        return this.store.dispatch(activeTask({ task: task || {} }));
+        this.store.dispatch(setActiveTask({ task: task || {} }));
       })
     );
+  }
+
+  clearActiveTask() {
+    this.store.dispatch(clearActiveTask());
   }
 
   update(task: Task) {
@@ -54,7 +59,7 @@ export class TasksService {
       first(),
       tap((task) => {
         this.store.dispatch(addTask({ task }));
-        this.store.dispatch(activeTask({ task }));
+        this.store.dispatch(setActiveTask({ task }));
       })
     );
   }

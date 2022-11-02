@@ -4,6 +4,7 @@ import { first, map, Observable } from 'rxjs';
 import { BoardsService } from 'src/app/services/board.service';
 import { FoldersService } from 'src/app/services/folder.service';
 import { SectionsService } from 'src/app/services/section.service';
+import { TagsService } from 'src/app/services/tag.service';
 import { TasksService } from 'src/app/services/task.service';
 
 @Component({
@@ -21,12 +22,14 @@ export class LayoutDefaultComponent implements OnInit {
     private boardsService: BoardsService,
     private sectionsService: SectionsService,
     private tasksService: TasksService,
+    private tagsService: TagsService,
     private sidebarService: NbSidebarService
   ) {}
   ngOnInit() {
     this.boardsService.fetchBoards();
     this.foldersService.fetchFolders();
     this.sectionsService.fetchSections();
+    this.tagsService.fetchTags();
     this.tasksService.fetchTasks();
     this.menuItems$ = this.formatFoldersStructure();
   }

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { first } from 'rxjs';
 import { TaskComponent } from '../task.component';
 
 @Component({ template: '' })
-export class TaskEntrypointComponent implements OnInit {
+export class TaskEntrypointComponent implements OnInit, OnDestroy {
+  private dialog: NbDialogRef<TaskComponent>;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -14,13 +16,16 @@ export class TaskEntrypointComponent implements OnInit {
 
   ngOnInit() {
     const { id } = this.route.snapshot.params as { id: string };
-    const dialog = this.dialogService.open(TaskComponent, {
+    this.dialog = this.dialogService.open(TaskComponent, {
       context: { id },
-      closeOnBackdropClick: true,
     });
 
-    dialog.onClose.pipe(first()).subscribe(() => {
+    this.dialog.onClose.pipe(first()).subscribe(() => {
       this.router.navigate(['../'], { relativeTo: this.route });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dialog.close();
   }
 }

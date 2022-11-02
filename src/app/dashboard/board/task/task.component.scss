@@ -8,8 +8,10 @@ nb-card-body {
   overflow-y: scroll;
 }
 
-md {
+md-input {
   height: 100%;
+  margin: 10px 5px;
+  overflow: auto;
 }
 
 form {

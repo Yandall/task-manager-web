@@ -11,14 +11,14 @@ import {
   HostListener,
   OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MarksRenderer, Plugins } from '@marks-js/marks';
 
 @Component({
-  selector: 'md',
+  selector: 'md-input',
   templateUrl: './markdown.component.html',
   styleUrls: ['./markdown.component.scss'],
   providers: [
@@ -28,6 +28,7 @@ import { MarksRenderer, Plugins } from '@marks-js/marks';
       multi: true,
     },
   ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownComponent
   implements OnInit, OnDestroy, ControlValueAccessor
@@ -91,9 +92,12 @@ export class MarkdownComponent
     if (!this.clickedOutside) {
       this.isFocus = true;
     } else {
-      const htmlNode = this.marks.render(this.mdControl.value);
-      (this.mdRenderer?.nativeElement as Element)?.replaceChildren(htmlNode);
-      this.isFocus = false;
+      // Async code in order to wait for value to initialize
+      setTimeout(() => {
+        const htmlNode = this.marks.render(this.mdControl.value);
+        (this.mdRenderer?.nativeElement as Element)?.replaceChildren(htmlNode);
+        this.isFocus = false;
+      }, 0);
     }
     this.clickedOutside = true;
   }

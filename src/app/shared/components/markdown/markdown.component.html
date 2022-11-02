@@ -1,5 +1,5 @@
-<div class="component">
-  <markdown-toolbar for="textarea_id" class="text-editor">
+<div class="md-component">
+  <markdown-toolbar for="description" class="text-editor">
     <nb-actions fullWidth>
       <nb-action title="Bold">
         <md-bold>
@@ -110,7 +110,7 @@
   <textarea
     nbInput
     fullWidth
-    id="textarea_id"
+    id="description"
     [formControl]="mdControl"
     *ngIf="isFocus"
   ></textarea>
